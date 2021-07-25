@@ -1,24 +1,35 @@
 <div class="container">
     <h1 class="text-center" style="color: green;">REGISTRO DE CLIENTE</h1>
-    <form style="width: 100%;
+    <form [formGroup]="formularioC" (ngSubmit)="enviar()" style="width: 100%;
     max-width: 600px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;">
-        <label><strong>Cedula: </strong><input type="text" placeholder="Ingrese su cedula" required></label>
+        <label><strong>Cedula: </strong><input formControlName="cedula" type="text" placeholder="Ingrese su cedula"></label>
+        <small *ngIf="!validador; else elseBlock" class="text-danger">Cedula Invalida</small>
+        <ng-template #elseBlock>
+            <small style="color: green;">Cedula Valida</small>
+        </ng-template>
+        <div *ngIf="formularioC.hasError('maxlength', 'cedula')" class="text-danger">
+           La cedula debe tener 10 digitos
+       </div> 
         <br/>
-        <label><strong>Nombres: </strong><input type="text" placeholder="Ingrese su nombre" required></label>
+        <label><strong>Nombres: </strong><input formControlName="nombres" type="text" placeholder="Ingrese su nombre"></label>
+        <div *ngIf="formularioC.hasError('pattern', 'nombres')" class="text-danger">
+            SOLO LETRAS
+        </div>
         <br/>
-        <label><strong>Apellidos: </strong><input type="text" placeholder="Ingrese su apellido" required></label>
+        <label><strong>Apellidos: </strong><input formControlName="apellidos" type="text" placeholder="Ingrese su apellido"></label>
         <br/>
-        <label><strong>Correo Electronico: </strong><input type="text" placeholder="Ingrese su correo electronico" required></label>
+        <label><strong>Correo Electronico: </strong><input formControlName="correo" type="email" placeholder="Ingrese su correo electronico"></label>
+        <!--<div *ngIf="formularioC.hasError('required', 'correo')">*</div>-->
         <br/>
-        <label><strong>Direccion: </strong><input type="text" placeholder="Ingrese su direccion" required></label>
+        <label><strong>Direccion: </strong><input formControlName="direccion" type="text" placeholder="Ingrese su direccion"></label>
         <br/>
-        <label><strong>Telefono: </strong><input type="text" placeholder="Ingrese su telefono" required></label>
+        <label><strong>Telefono: </strong><input formControlName="telefono" type="text" placeholder="Ingrese su telefono"></label>
         <br/>
-        <button class="btn btn-success" (click)="regC()">Registrarse</button>
+        <button class="btn btn-success" [disabled]="formularioC.invalid" type="submit">Registrarse</button>
     </form>
 </div>
