@@ -8,12 +8,18 @@ import { AppComponent } from './app.component';
 import { RegistroclienteComponent } from './components/registrocliente/registrocliente.component';
 import { RegistrorestauranteComponent } from './components/registrorestaurante/registrorestaurante.component';
 import { WsJeeService } from './services/ws-jee.service';
+import { IndexComponent } from './components/index/index.component';
+import { RegistroreservaComponent } from './components/registroreserva/registroreserva.component';
+import { ListadoreservaComponent } from './components/listadoreserva/listadoreserva.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistroclienteComponent,
-    RegistrorestauranteComponent
+    RegistrorestauranteComponent,
+    IndexComponent,
+    RegistroreservaComponent,
+    ListadoreservaComponent
   ],
   imports: [
     BrowserModule,

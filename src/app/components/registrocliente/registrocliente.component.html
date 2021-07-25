@@ -1,35 +1,150 @@
 <div class="container">
-    <h1 class="text-center" style="color: green;">REGISTRO DE CLIENTE</h1>
-    <form [formGroup]="formularioC" (ngSubmit)="enviar()" style="width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;">
-        <label><strong>Cedula: </strong><input formControlName="cedula" type="text" placeholder="Ingrese su cedula"></label>
-        <small *ngIf="!validador; else elseBlock" class="text-danger">Cedula Invalida</small>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" routerLink="/index">INICIO</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link active" style="color: green;" aria-current="page" routerLink="/registroC">Crear Cliente</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" routerLink="/registroRe">Crear Restaurante</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" routerLink="/registroRa">Crear Reserva</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" routerLink="/listadoRa">Listar Reserva</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+    </nav>
+  <div class="container">
+    <h1 class="text-center" style="color: green">REGISTRO DE CLIENTE</h1>
+    <form
+      [formGroup]="formularioC"
+      (ngSubmit)="regC(formularioC.value)"
+      style="
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <label
+        ><strong>Cedula: </strong
+        ><input
+          formControlName="cedula"
+          type="text"
+          placeholder="Ingrese su cedula"
+      /></label>
+      <div
+        *ngIf="
+          formularioC.value?.cedula?.length == 10 &&
+          formularioC.value?.cedula != null
+        "
+      >
+        <small *ngIf="!validador; else elseBlock" class="text-danger"
+          >Cedula Invalida</small
+        >
         <ng-template #elseBlock>
-            <small style="color: green;">Cedula Valida</small>
+          <small style="color: green">Cedula Valida</small>
         </ng-template>
-        <div *ngIf="formularioC.hasError('maxlength', 'cedula')" class="text-danger">
-           La cedula debe tener 10 digitos
-       </div> 
-        <br/>
-        <label><strong>Nombres: </strong><input formControlName="nombres" type="text" placeholder="Ingrese su nombre"></label>
-        <div *ngIf="formularioC.hasError('pattern', 'nombres')" class="text-danger">
-            SOLO LETRAS
-        </div>
-        <br/>
-        <label><strong>Apellidos: </strong><input formControlName="apellidos" type="text" placeholder="Ingrese su apellido"></label>
-        <br/>
-        <label><strong>Correo Electronico: </strong><input formControlName="correo" type="email" placeholder="Ingrese su correo electronico"></label>
-        <!--<div *ngIf="formularioC.hasError('required', 'correo')">*</div>-->
-        <br/>
-        <label><strong>Direccion: </strong><input formControlName="direccion" type="text" placeholder="Ingrese su direccion"></label>
-        <br/>
-        <label><strong>Telefono: </strong><input formControlName="telefono" type="text" placeholder="Ingrese su telefono"></label>
-        <br/>
-        <button class="btn btn-success" [disabled]="formularioC.invalid" type="submit">Registrarse</button>
+      </div>
+      <div
+        *ngIf="formularioC.hasError('maxlength', 'cedula')"
+        class="text-danger"
+      >
+        LA CEDULA DE TENER 10 DIGITOS
+      </div>
+      <div
+        *ngIf="formularioC.hasError('pattern', 'cedula')"
+        class="text-danger"
+      >
+        SOLO NUMEROS
+      </div>
+      <br />
+
+      <label
+        ><strong>Nombres: </strong
+        ><input
+          formControlName="nombres"
+          type="text"
+          placeholder="Ingrese su nombre"
+      /></label>
+      <div
+        *ngIf="formularioC.hasError('pattern', 'nombres')"
+        class="text-danger"
+      >
+        SOLO LETRAS
+      </div>
+      <br />
+
+      <label
+        ><strong>Apellidos: </strong
+        ><input
+          formControlName="apellidos"
+          type="text"
+          placeholder="Ingrese su apellido"
+      /></label>
+      <div
+        *ngIf="formularioC.hasError('pattern', 'apellidos')"
+        class="text-danger"
+      >
+        SOLO LETRAS
+      </div>
+      <br />
+
+      <label
+        ><strong>Correo Electronico: </strong
+        ><input
+          formControlName="correo"
+          type="email"
+          placeholder="Ingrese su correo electronico"
+      /></label>
+      <div *ngIf="formularioC.hasError('email', 'correo')" class="text-danger">
+        Correo no valido
+      </div>
+      <br />
+
+      <label
+        ><strong>Direccion: </strong
+        ><input
+          formControlName="direccion"
+          type="text"
+          placeholder="Ingrese su direccion"
+      /></label>
+      <br />
+
+      <label
+        ><strong>Telefono: </strong
+        ><input
+          formControlName="telefono"
+          type="text"
+          placeholder="Ingrese su telefono"
+      /></label>
+      <div
+        *ngIf="formularioC.hasError('pattern', 'telefono')"
+        class="text-danger"
+      >
+        SOLO NUMEROS
+      </div>
+      <br />
+
+      <button
+        class="btn btn-success"
+        [disabled]="formularioC.invalid"
+        type="submit"
+      >
+        Registrarse
+      </button>
     </form>
+  </div>
 </div>

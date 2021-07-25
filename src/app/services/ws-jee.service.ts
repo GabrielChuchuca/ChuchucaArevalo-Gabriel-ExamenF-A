@@ -3,6 +3,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cliente, ClienteResponse } from '../models/cliente';
+import { RestauranteResponse } from '../models/restaurante';
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +18,12 @@ export class WsJeeService {
       headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'})
     }
     return this.http.post<ClienteResponse>("http://localhost:8080/ChuchucaArevalo-Gabriel-ExamenF/rest/cliente/registroC", cli, httpOptions)
+  }
+
+  addRestaurante(res:any):Observable<RestauranteResponse>{
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'})
+    }
+    return this.http.post<RestauranteResponse>("http://localhost:8080/ChuchucaArevalo-Gabriel-ExamenF/rest/restaurante/registroR", res, httpOptions)
   }
 }

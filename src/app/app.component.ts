@@ -7,6 +7,6 @@ import { Cliente } from './models/cliente';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  cliente :Cliente
+  //cliente :Cliente
   title = 'ChuchucaArevalo-Gabriel-ExamenF-A';
 }

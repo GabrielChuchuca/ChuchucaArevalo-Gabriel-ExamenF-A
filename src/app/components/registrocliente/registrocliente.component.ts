@@ -11,40 +11,35 @@ import { WsJeeService } from 'src/app/services/ws-jee.service';
   styleUrls: ['./registrocliente.component.css']
 })
 export class RegistroclienteComponent implements OnInit {
-  public Cliente:Observable<Cliente>
+  //public Cliente:Observable<Cliente>
   formularioC : FormGroup
   public validador:boolean
 
-  cedulaa:any=""
-  /*cedula:string = ""
-  nombres:string = ""
-  apellidos:string = ""
-  correo:string = ""
-  direccion:string = ""
-  telefono:string = ""*/
+  constructor(private Ws : WsJeeService, private builder: FormBuilder) { }
 
-  constructor(private Ws : WsJeeService, private builder: FormBuilder) { 
+  ngOnInit(): void {
     this.formularioC = this.builder.group({
-      cedula: ['', Validators.compose([Validators.maxLength(10), Validators.required])],
+      cedula: ['', Validators.compose([Validators.maxLength(10), Validators.required, Validators.pattern('[0-9]*')])],
       nombres: ['', Validators.compose([Validators.required, Validators.pattern("[a-zA-Z ]*")])],
-      apellidos: ['', Validators.required],
+      apellidos: ['', Validators.compose([Validators.required, Validators.pattern("[a-zA-Z ]*")])],
       correo: ['', Validators.compose([Validators.email, Validators.required])],
-      direccion: ['', Validators.required],
-      telefono: ['', Validators.required]
+      direccion: ['', Validators.compose([Validators.required])],
+      telefono: ['', Validators.compose([Validators.required, Validators.pattern('[0-9]*')])]
     })
 
     this.formularioC.get('cedula')?.valueChanges.subscribe(se =>{
-      this.validadorDeCedula(se)
+      try{
+        this.validadorDeCedula(se)
+      }catch(e){
+      }
     })
-   }
-  ngOnInit(): void {
   }
 
   validadorDeCedula(cedula:string) {
     let cedulaCorrecta = false;
     if (cedula.length == 10)
     {    
-        let tercerDigito = parseInt(cedula.substring(2, 3));
+        let tercerDigito = parseInt(cedula.substring(2 , 3));
         if (tercerDigito < 6) {
             // El ultimo digito se lo considera dígito verificador
             let coefValCedula = [2, 1, 2, 1, 2, 1, 2, 1, 2];       
@@ -72,31 +67,20 @@ export class RegistroclienteComponent implements OnInit {
     this.validador= cedulaCorrecta;
   }
 
-  enviar(){
-    console.log(this.formularioC.value)
-  }
-
-  regC():void{
+  regC(values:any):void{
     let cli :Cliente
     cli = {cedula:"cedula", nombres:"nombres", apellidos:"apellidos", correo:"correo", direccion:"direccion", telefono:"telefono"}
     let c = new URLSearchParams()
-    /*c.set(cli.cedula, this.cedula)
-    c.set(cli.nombres, this.nombres)
-    c.set(cli.apellidos, this.apellidos)
-    c.set(cli.correo, this.correo)
-    c.set(cli.direccion, this.direccion)
-    c.set(cli.telefono, this.telefono)*/
+    c.set(cli.cedula, this.formularioC.value.cedula)
+    c.set(cli.nombres, this.formularioC.value.nombres)
+    c.set(cli.apellidos, this.formularioC.value.apellidos)
+    c.set(cli.correo, this.formularioC.value.correo)
+    c.set(cli.direccion, this.formularioC.value.direccion)
+    c.set(cli.telefono, this.formularioC.value.telefono)
 
-    /*c.set("cedula", "0105554468"),
-    c.set("nombres", "sdssdss"),
-    c.set("apellidos", "5sddssa"),
-    c.set("correo", "sdsds"),
-    c.set("direccion", "sdssds"),
-    c.set("telefono", "54554")
-    console.log(cli.cedula)*/
-
-    this.Ws.addCliente(c).subscribe((res) => {
-      console.log("OE>>>>>>>> ",res)
+    this.Ws.addCliente(c).subscribe((res:any) => {
+      alert(res['estado'])
+      this.formularioC.reset()
     })
   }
 }

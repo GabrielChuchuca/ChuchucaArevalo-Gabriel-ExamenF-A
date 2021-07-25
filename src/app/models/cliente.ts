@@ -8,7 +8,7 @@ export interface Cliente{
 }
 
 export interface ClienteResponse extends Cliente{
-    estadoCreacionUsuario:string
+    estado:string
 }
 
 /*class Cliente{
