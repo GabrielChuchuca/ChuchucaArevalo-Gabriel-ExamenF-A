@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" routerLink="/index">INICIO</a>
@@ -23,4 +23,61 @@
             </div>
           </div>
     </nav>
+    <div class="container">
+      <input type="time">
+
+      <h1 class="text-center" style="color: green">REGISTRO DE RESERVA</h1>
+      <form [formGroup]="formularioRa" 
+      (ngSubmit)="regRa(formularioRa.value)"
+      style="
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    ">
+    <label>Escriba Su Nombre: <input formControlName="nombreC" type="text"  placeholder="Ingrese sus nombres"></label>
+    <div
+        *ngIf="formularioRa.hasError('pattern', 'nombreC')"
+        class="text-danger"
+      >
+        SOLO LETRAS
+      </div>
+    <div *ngIf="formularioRa.value?.nombreC != '' && formularioRa.value?.nombreC?.length > 5">
+      <small *ngIf="!validador; else elseBlock" class="text-danger"
+          >No existe Cliente</small
+        >
+        <ng-template #elseBlock>
+          <br/>
+            <label>Escriba el nombre del Restaurante: <input formControlName="nombreR" type="text"  placeholder="Ingrese el nombre"></label>
+            <div *ngIf="formularioRa.value?.nombreR != '' && formularioRa.value?.nombreR?.length > 2">
+              <small *ngIf="!validadorR; else elseBlock" class="text-danger"
+          >No existe Restaurante</small
+        >
+            </div>
+            <ng-template #elseBlock>
+              <br/>
+            
+              <label>Numero de Personas: <input formControlName="numPer" type="number" placeholder="Ingrese el numero de personas"> <span>Numero de Aforo: {{numP_D}}</span></label>
+              <div *ngIf="formularioRa.value?.numPer <= numP_D; else elseBlock">
+                <br/>
+              <button
+    class="btn btn-success"
+    [disabled]="formularioRa.invalid"
+    type="submit"
+    >
+      Crear Reserva
+    </button> 
+              </div>
+              <ng-template #elseBlock>
+                SUPERA EL AFORO PERMITIDO
+              </ng-template>
+            </ng-template>
+        </ng-template>
+    </div>
+    <br/>
+  </form>
+    </div>
 </div>

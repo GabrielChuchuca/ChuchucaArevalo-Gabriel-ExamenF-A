@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" routerLink="/index">INICIO</a>
@@ -73,29 +73,17 @@
       <br />
 
       <label
-        ><strong>Nombres: </strong
-        ><input
-          formControlName="nombres"
-          type="text"
-          placeholder="Ingrese su nombre"
-      /></label>
+        ><strong>Nombres Completos: </strong
+        >
+        
+            <input
+            formControlName="nombresCompletos"
+            type="text"
+            placeholder="Ingrese su nombre" size="20"/>
+    
+    </label>
       <div
-        *ngIf="formularioC.hasError('pattern', 'nombres')"
-        class="text-danger"
-      >
-        SOLO LETRAS
-      </div>
-      <br />
-
-      <label
-        ><strong>Apellidos: </strong
-        ><input
-          formControlName="apellidos"
-          type="text"
-          placeholder="Ingrese su apellido"
-      /></label>
-      <div
-        *ngIf="formularioC.hasError('pattern', 'apellidos')"
+        *ngIf="formularioC.hasError('pattern', 'nombresCompletos')"
         class="text-danger"
       >
         SOLO LETRAS
