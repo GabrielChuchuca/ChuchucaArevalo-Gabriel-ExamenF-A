@@ -54,6 +54,10 @@ export class WsJeeService {
     return this.http.get("http://localhost:8080/ChuchucaArevalo-Gabriel-ExamenF/rest/cliente/clienteBAll")
   }
 
+  getReservas(){
+    return this.http.get("http://localhost:8080/ChuchucaArevalo-Gabriel-ExamenF/rest/reserva/listarRa")
+  }
+
 
 
   //http://localhost:8080/ChuchucaArevalo-Gabriel-ExamenF/rest/cliente/clienteB

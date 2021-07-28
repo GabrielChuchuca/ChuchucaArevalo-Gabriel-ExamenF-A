@@ -14,6 +14,9 @@ export class RegistroreservaComponent implements OnInit {
   public validador:boolean
   public validadorR:boolean
   numP_D:number = 0
+  public cliente:any=[]
+  public restaurante:any=[]
+
   f:string
   h:string
   //fh:string
@@ -63,6 +66,7 @@ export class RegistroreservaComponent implements OnInit {
     this.Ws.getCliente(c).subscribe((res) => {
       usuarioExiste = true
       this.validador = usuarioExiste
+      this.cliente = res
       console.log(res)
     },(error) => {
       usuarioExiste = false
@@ -78,6 +82,7 @@ export class RegistroreservaComponent implements OnInit {
     this.Ws.getRestaurante(c).subscribe((res) => {
       restauranteExiste = true
       this.validadorR = restauranteExiste
+      this.restaurante = res
       this.numP_D = parseInt(res.numAforo)
       console.log(res)
     },(error) => {
@@ -87,7 +92,7 @@ export class RegistroreservaComponent implements OnInit {
     })
   }
 
-  regRa(vaules:any){
+  regRa(values:any){
     let ra = new URLSearchParams()
     this.f = this.formularioRa.value.fecha
     this.h = this.formularioRa.value.hora

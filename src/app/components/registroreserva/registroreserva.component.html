@@ -47,8 +47,29 @@
       <small *ngIf="!validador; else elseBlock" class="text-danger"
           >No existe Cliente</small
         >
-        <ng-template #elseBlock>
-          <br/>
+        <ng-template #elseBlock class="container">
+          <table class="table table-dark">
+            <thead>
+              <tr>
+                <th scope="col">CEDULA</th>
+                <th scope="col">NOMBRES</th>
+                <th scope="col">APELLIDOS</th>
+                <th scope="col">CORREO</th>
+                <th scope="col">DIRECCION</th>
+                <th scope="col">TELEFONO</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>{{cliente.cedula}}</th>
+                <th>{{cliente.nombres}}</th>
+                <th>{{cliente.apellidos}}</th>
+                <th>{{cliente.correo}}</th>
+                <th>{{cliente.direccion}}</th>
+                <th>{{cliente.telefono}}</th>
+              </tr>
+            </tbody>
+          </table>
             <label>Escriba el nombre del Restaurante: <input formControlName="nombreR" type="text"  placeholder="Ingrese el nombre"></label>
             <div *ngIf="formularioRa.value?.nombreR != '' && formularioRa.value?.nombreR?.length > 2">
               <small *ngIf="!validadorR; else elseBlock" class="text-danger"
@@ -56,10 +77,30 @@
         >
             </div>
             <ng-template #elseBlock>
+              <table class="table table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">NOMBRE</th>
+                    <th scope="col">DIRECCION</th>
+                    <th scope="col">TELEFONO</th>
+                    <th scope="col">NUMERO DE AFORO</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>{{restaurante.id}}</th>
+                    <th>{{restaurante.nombre}}</th>
+                    <th>{{restaurante.direccion}}</th>
+                    <th>{{restaurante.telefono}}</th>
+                    <th>{{restaurante.numAforo}}</th>
+                  </tr>
+                </tbody>
+              </table>
               <br/>
-              <input type="date" formControlName="fecha">
-              <input type="time" formControlName="hora">
-              <label>Numero de Personas: <input formControlName="numPer" type="number" placeholder="Ingrese el numero de personas"> <span>Numero de Aforo: {{numP_D}}</span></label>
+              <label>Fecha&Hora: <input type="date" formControlName="fecha"><input type="time" formControlName="hora"></label>
+                <br/>
+              <label>Numero de Personas: <input formControlName="numPer" type="number" placeholder="Ingrese el numero de personas"></label>
               <div *ngIf="formularioRa.value?.numPer <= numP_D; else elseBlock">
                 <br/>
               <button
@@ -71,7 +112,9 @@
     </button> 
               </div>
               <ng-template #elseBlock>
-                SUPERA EL AFORO PERMITIDO
+                <br/>
+                <p style="color: red;">SUPERA EL AFORO PERMITIDO</p>
+                
               </ng-template>
             </ng-template>
         </ng-template>
