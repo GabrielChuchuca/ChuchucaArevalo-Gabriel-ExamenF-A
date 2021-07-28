@@ -20,7 +20,8 @@ export class RegistroclienteComponent implements OnInit {
   ngOnInit(): void {
     this.formularioC = this.builder.group({
       cedula: ['', Validators.compose([Validators.maxLength(10), Validators.required, Validators.pattern('[0-9]*')])],
-      nombresCompletos: ['', Validators.compose([Validators.required, Validators.pattern("[a-zA-Z ]*")])],
+      apellidos: ['', Validators.compose([Validators.required, Validators.pattern("[a-zA-Z ]*")])],
+      nombres: ['', Validators.compose([Validators.required, Validators.pattern("[a-zA-Z ]*")])],
       correo: ['', Validators.compose([Validators.email, Validators.required])],
       direccion: ['', Validators.compose([Validators.required])],
       telefono: ['', Validators.compose([Validators.required, Validators.pattern('[0-9]*')])]
@@ -68,10 +69,11 @@ export class RegistroclienteComponent implements OnInit {
 
   regC(values:any):void{
     let cli :Cliente
-    cli = {cedula:"cedula", nombresCompletos:"nombresCompletos", correo:"correo", direccion:"direccion", telefono:"telefono"}
+    cli = {cedula:"cedula", nombres:"nombres", apellidos:"apellidos", correo:"correo", direccion:"direccion", telefono:"telefono"}
     let c = new URLSearchParams()
     c.set(cli.cedula, this.formularioC.value.cedula)
-    c.set(cli.nombresCompletos, this.formularioC.value.nombresCompletos)
+    c.set(cli.nombres, this.formularioC.value.nombres)
+    c.set(cli.apellidos, this.formularioC.value.apellidos)
     c.set(cli.correo, this.formularioC.value.correo)
     c.set(cli.direccion, this.formularioC.value.direccion)
     c.set(cli.telefono, this.formularioC.value.telefono)

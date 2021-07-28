@@ -1,4 +1,5 @@
 import { Time } from '@angular/common';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { WsJeeService } from 'src/app/services/ws-jee.service';
@@ -13,20 +14,22 @@ export class RegistroreservaComponent implements OnInit {
   public validador:boolean
   public validadorR:boolean
   numP_D:number = 0
-  value:Date = new Date(1970, 0, 1, 14, 57, 0)
-  
-
+  f:string
+  h:string
+  //fh:string
 
   constructor(private Ws:WsJeeService, private builder:FormBuilder) { }
 
   ngOnInit(): void {
     this.formularioRa = this.builder.group({
-      nombreC: ['', Validators.compose([Validators.required, Validators.pattern("[a-zA-Z ]*")])],
+      cedula: ['', Validators.compose([Validators.required, Validators.pattern("[0-9]*")])],
       nombreR: ['', Validators.compose([Validators.required, Validators.pattern("[a-zA-Z ]*")])],
+      fecha:['', Validators.required],
+      hora:['', Validators.required],
       numPer:['', Validators.compose([Validators.required])]
     })
 
-    this.formularioRa.get('nombreC')?.valueChanges.subscribe(se => {
+    this.formularioRa.get('cedula')?.valueChanges.subscribe(se => {
       try{
         this.getC(se)
       }catch(e){
@@ -39,15 +42,24 @@ export class RegistroreservaComponent implements OnInit {
       }catch(e){
       }
     })
+    this.formularioRa.get('fecha', )?.valueChanges.subscribe(fe => {
+      this.f = fe
+      //this.fh = this.f+this.h
+      //console.log(this.f)
+      //console.log(this.fh)
+    })
 
-
+    this.formularioRa.get('hora')?.valueChanges.subscribe(ho => {
+      this.h = ho
+      //this.fh = this.f+this.h
+      //console.log(this.fh)
+    })
   }
 
-
-  getC(nom:string){
+  getC(ced:string){
     let usuarioExiste = false
     let c = new URLSearchParams()
-    c.set('nombres', nom)
+    c.set('cedula', ced)
     this.Ws.getCliente(c).subscribe((res) => {
       usuarioExiste = true
       this.validador = usuarioExiste
@@ -77,9 +89,14 @@ export class RegistroreservaComponent implements OnInit {
 
   regRa(vaules:any){
     let ra = new URLSearchParams()
-    ra.set("nombreC", this.formularioRa.value.nombreC)
+    this.f = this.formularioRa.value.fecha
+    this.h = this.formularioRa.value.hora
+    ra.set("cedula", this.formularioRa.value.cedula)
     ra.set("nombreR", this.formularioRa.value.nombreR)
+    ra.set("fh", this.f+ " " +this.h)
     ra.set("numP", this.formularioRa.value.numPer)
+    
+    //console.log(this.f+this.h)
 
     this.Ws.addReserva(ra).subscribe((res:any) => {
       alert(res['estado'])

@@ -24,8 +24,6 @@
           </div>
     </nav>
     <div class="container">
-      <input type="time">
-
       <h1 class="text-center" style="color: green">REGISTRO DE RESERVA</h1>
       <form [formGroup]="formularioRa" 
       (ngSubmit)="regRa(formularioRa.value)"
@@ -38,14 +36,14 @@
       justify-content: center;
       align-items: center;
     ">
-    <label>Escriba Su Nombre: <input formControlName="nombreC" type="text"  placeholder="Ingrese sus nombres"></label>
+    <label>Escriba Su N. de Cedula: <input formControlName="cedula" type="text"  placeholder="Ingrese su numero de cedula"></label>
     <div
-        *ngIf="formularioRa.hasError('pattern', 'nombreC')"
+        *ngIf="formularioRa.hasError('pattern', 'cedula')"
         class="text-danger"
       >
-        SOLO LETRAS
+        SOLO NUMEROS
       </div>
-    <div *ngIf="formularioRa.value?.nombreC != '' && formularioRa.value?.nombreC?.length > 5">
+    <div *ngIf="formularioRa.value?.cedula!= '' && formularioRa.value?.cedula?.length == 10">
       <small *ngIf="!validador; else elseBlock" class="text-danger"
           >No existe Cliente</small
         >
@@ -59,7 +57,8 @@
             </div>
             <ng-template #elseBlock>
               <br/>
-            
+              <input type="date" formControlName="fecha">
+              <input type="time" formControlName="hora">
               <label>Numero de Personas: <input formControlName="numPer" type="number" placeholder="Ingrese el numero de personas"> <span>Numero de Aforo: {{numP_D}}</span></label>
               <div *ngIf="formularioRa.value?.numPer <= numP_D; else elseBlock">
                 <br/>

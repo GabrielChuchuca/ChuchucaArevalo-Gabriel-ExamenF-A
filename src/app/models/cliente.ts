@@ -1,6 +1,7 @@
 export interface Cliente{
     cedula:string
-    nombresCompletos:string
+    nombres:string
+    apellidos:string
     correo:string
     direccion:string
     telefono:string

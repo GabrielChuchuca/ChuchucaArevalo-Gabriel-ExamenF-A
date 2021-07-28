@@ -73,17 +73,34 @@
       <br />
 
       <label
-        ><strong>Nombres Completos: </strong
+        ><strong>Nombres: </strong
         >
         
             <input
-            formControlName="nombresCompletos"
+            formControlName="nombres"
             type="text"
             placeholder="Ingrese su nombre" size="20"/>
     
     </label>
       <div
-        *ngIf="formularioC.hasError('pattern', 'nombresCompletos')"
+        *ngIf="formularioC.hasError('pattern', 'nombres')"
+        class="text-danger"
+      >
+        SOLO LETRAS
+      </div>
+      <br />
+
+      <label
+        ><strong>Apellidos: </strong
+        >
+            <input
+            formControlName="apellidos"
+            type="text"
+            placeholder="Ingrese su apellidos" size="20"/>
+    
+    </label>
+      <div
+        *ngIf="formularioC.hasError('pattern', 'apellidos')"
         class="text-danger"
       >
         SOLO LETRAS
