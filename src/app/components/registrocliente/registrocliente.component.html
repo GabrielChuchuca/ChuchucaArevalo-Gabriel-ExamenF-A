@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" style="background-color:lightblue">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" routerLink="/index">INICIO</a>
@@ -23,7 +23,7 @@
             </div>
           </div>
     </nav>
-  <div class="container">
+  <div class="container" style="background-color:lightblue">
     <h1 class="text-center" style="color: green">REGISTRO DE CLIENTE</h1>
     <form
       [formGroup]="formularioC"
@@ -144,7 +144,7 @@
       <br />
 
       <button
-        class="btn btn-success"
+        class="btn btn-outline-success my-2 my-sm-0"
         [disabled]="formularioC.invalid"
         type="submit"
       >
@@ -152,4 +152,10 @@
       </button>
     </form>
   </div>
+  <footer>
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+        © 2021 Copyright:
+        <a class="text-reset fw-bold" href="https://www.facebook.com/gavriellrj">Gabriel Chuchuca</a>
+      </div>
+</footer>
 </div>

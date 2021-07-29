@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" style="background-color:lightblue">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" routerLink="/index">INICIO</a>
@@ -23,7 +23,7 @@
             </div>
           </div>
     </nav>
-    <div>
+    <div class="container" style="background-color:lightblue">
       <h1 class="text-center" style="color: green">LISTADO DE RESERVAS DE RESERVA</h1>
       <form [formGroup]="formularioLRa" style="
       width: 100%;
@@ -36,8 +36,8 @@
     "
       >
       <label>Escriba para buscar: <input formControlName="cednom" type="text"  placeholder="Ingrese para buscar"></label>
-      <small *ngIf="!validador && !validadorR || formularioLRa.value?.cednom == ''; else elseBlock">
-        No EXISTE
+      <small class="text-danger" *ngIf="!validador && !validadorR || formularioLRa.value?.cednom == ''; else elseBlock">
+        NO EXISTE
       </small>
       <ng-template #elseBlock>
         <label>Fecha&Hora: <input type="date" formControlName="fecha"></label>
@@ -49,17 +49,23 @@
               <tr>
                 <th scope="col">ID RESERVA</th>
                 <th scope="col">FECHA RESERVA</th>
+                <th scope="col"># PERSONAS RESERVA</th>
                 <th scope="col">CLIENTE</th>
                 <th scope="col">RESTAURANTE</th>
+                <th scope="col">DIRECCION</th>
+                <th scope="col">AFORO ACTUAL</th>
               </tr>
             </thead>
             <tbody *ngFor="let r of reservas">
               <!--<tr *ngIf="formularioLRa.value?.cednom == r.fechaHoraReserva">-->
               <tr *ngIf="(formularioLRa.value?.cednom == r.cliente.cedula && r.fechaHoraReserva.startsWith(formularioLRa.value?.fecha)) || (formularioLRa.value?.cednom == r.restaurante.nombre && r.fechaHoraReserva.startsWith(formularioLRa.value?.fecha))">
                 <th>{{r.id}}</th>
-                <th>{{r.fechaHoraReserva}}</th>
+                <th>{{r.fechaHoraReserva.substring(0, 19)}}</th>
+                <th>{{r.numPersonas}}</th>
                 <th>{{r.cliente.nombres}} {{r.cliente.apellidos}}</th>
                 <th>{{r.restaurante.nombre}}</th>
+                <th>{{r.restaurante.direccion}}</th>
+                <th>{{r.restaurante.numAforo}}</th>
               </tr>
             </tbody>
           </table>
@@ -67,4 +73,10 @@
       </ng-template>
       </form>
     </div>
+    <footer>
+      <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+          © 2021 Copyright:
+          <a class="text-reset fw-bold" href="https://www.facebook.com/gavriellrj">Gabriel Chuchuca</a>
+        </div>
+  </footer>
 </div>
