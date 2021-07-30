@@ -26,7 +26,7 @@ export class RegistroreservaComponent implements OnInit {
   ngOnInit(): void {
     this.formularioRa = this.builder.group({
       cedula: ['', Validators.compose([Validators.required, Validators.pattern("[0-9]*")])],
-      nombreR: ['', Validators.compose([Validators.required, Validators.pattern("[a-zA-Z ]*")])],
+      nombreR: ['', Validators.compose([Validators.required])],
       fecha:['', Validators.required],
       hora:['', Validators.required],
       numPer:['', Validators.compose([Validators.required])]

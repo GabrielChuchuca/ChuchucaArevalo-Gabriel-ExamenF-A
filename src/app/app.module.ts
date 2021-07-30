@@ -11,6 +11,7 @@ import { WsJeeService } from './services/ws-jee.service';
 import { IndexComponent } from './components/index/index.component';
 import { RegistroreservaComponent } from './components/registroreserva/registroreserva.component';
 import { ListadoreservaComponent } from './components/listadoreserva/listadoreserva.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ListadoreservaComponent } from './components/listadoreserva/listadorese
     AppRoutingModule, 
     HttpClientModule,
     //FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [WsJeeService],
   bootstrap: [AppComponent]

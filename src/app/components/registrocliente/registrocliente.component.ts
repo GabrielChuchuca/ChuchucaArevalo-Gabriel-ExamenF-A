@@ -20,8 +20,8 @@ export class RegistroclienteComponent implements OnInit {
   ngOnInit(): void {
     this.formularioC = this.builder.group({
       cedula: ['', Validators.compose([Validators.maxLength(10), Validators.required, Validators.pattern('[0-9]*')])],
-      apellidos: ['', Validators.compose([Validators.required, Validators.pattern("[a-zA-Z ]*")])],
-      nombres: ['', Validators.compose([Validators.required, Validators.pattern("[a-zA-Z ]*")])],
+      apellidos: ['', Validators.compose([Validators.required, Validators.pattern("[a-zA-ZáéíóúñÑ ]*")])],
+      nombres: ['', Validators.compose([Validators.required, Validators.pattern("[a-zA-ZáéíóúñÑ ]*")])],
       correo: ['', Validators.compose([Validators.email, Validators.required])],
       direccion: ['', Validators.compose([Validators.required])],
       telefono: ['', Validators.compose([Validators.required, Validators.pattern('[0-9]*')])]

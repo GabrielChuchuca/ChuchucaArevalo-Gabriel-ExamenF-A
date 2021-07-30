@@ -1,7 +1,9 @@
 <div class="container-fluid" style="background-color:lightblue">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/index">INICIO</a>
+      <a class="navbar-brand" routerLink="/index"><span class="material-icons">
+        home
+        </span>INICIO</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -17,7 +19,9 @@
         <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link" aria-current="page" routerLink="/registroC"
-              >Crear Cliente</a
+              ><span class="material-icons">
+                account_circle
+                </span>Crear Cliente</a
             >
           </li>
           <li class="nav-item">
@@ -26,17 +30,24 @@
               style="color: green"
               aria-current="page"
               routerLink="/registroRe"
-              >Crear Restaurante</a
+              ><span class="material-icons">
+                restaurant
+                </span>Crear Restaurante</a
             >
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" routerLink="/registroRa"
-              >Crear Reserva</a
+              ><span class="material-icons">
+                receipt_long
+                </span>Crear Reserva</a
             >
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" routerLink="/listadoRa"
-              >Listar Reserva</a
+              ><span class="material-icons">
+                view_list
+                </span>
+                Listar Reserva</a
             >
           </li>
         </ul>
@@ -44,7 +55,9 @@
     </div>
   </nav>
   <div class="container" style="background-color:lightblue">
-    <h1 class="text-center" style="color: green">REGISTRO DE UN RESTAURANTE</h1>
+    <h1 class="text-center" style="color: green"><span class="material-icons">
+      restaurant
+      </span>REGISTRO DE UN RESTAURANTE</h1>
     <form
       [formGroup]="formularioRe"
       (ngSubmit)="regRe(formularioRe.value)"
@@ -110,7 +123,9 @@
         class="btn btn-outline-success my-2 my-sm-0"
         [disabled]="formularioRe.invalid"
         type="submit"
-      >
+      ><span class="material-icons">
+        restaurant
+        </span>
         Registrar
       </button>
     </form>
